@@ -20,9 +20,6 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Create web platform files if missing
-        run: flutter create . --platforms=web --project-name cynemax
-
       - name: Install dependencies
         run: flutter pub get
 
@@ -34,4 +31,3 @@ jobs:
         with:
           name: CynemaX-Web
           path: build/web
-          if-no-files-found: error
