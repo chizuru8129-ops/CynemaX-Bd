@@ -20,6 +20,15 @@ jobs:
           channel: stable
           cache: true
 
+      - name: Backup CynemaX main.dart
+        run: cp lib/main.dart /tmp/cynemax-main.dart
+
+      - name: Create Flutter Web files
+        run: flutter create . --platforms=web --project-name cynemax
+
+      - name: Restore CynemaX main.dart
+        run: cp /tmp/cynemax-main.dart lib/main.dart
+
       - name: Install dependencies
         run: flutter pub get
 
