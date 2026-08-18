@@ -20,8 +20,8 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Enable Flutter Web
-        run: flutter config --enable-web
+      - name: Create web platform files if missing
+        run: flutter create . --platforms=web
 
       - name: Install dependencies
         run: flutter pub get
@@ -34,3 +34,4 @@ jobs:
         with:
           name: CynemaX-Web
           path: build/web
+          if-no-files-found: error
