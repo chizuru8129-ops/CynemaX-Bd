@@ -21,7 +21,7 @@ jobs:
           cache: true
 
       - name: Create web platform files if missing
-        run: flutter create . --platforms=web
+        run: flutter create . --platforms=web --project-name cynemax
 
       - name: Install dependencies
         run: flutter pub get
