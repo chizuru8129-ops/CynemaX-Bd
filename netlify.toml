@@ -1,0 +1,47 @@
+# CynemaX Bd — Netlify Deployment Config
+# Developer: Shouko Nishimiya
+#
+# HOW TO DEPLOY:
+#   1. Run: flutter build web --release --dart-define=WEB_BUILD=true
+#   2. Upload the `build/web` folder to Netlify
+#      OR connect your GitHub repo and set build command below.
+
+[build]
+  # If connected to GitHub repo, Netlify will auto-build
+  command   = "flutter build web --release --dart-define=WEB_BUILD=true"
+  publish   = "build/web"
+
+[build.environment]
+  FLUTTER_VERSION = "3.32.0"
+
+# SPA routing — redirect all paths to index.html
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+
+# Security + CORS headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+    # Allow Railway API calls from browser
+    Access-Control-Allow-Origin = "*"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.wasm"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
